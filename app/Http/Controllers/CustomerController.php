@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Models\Customer;
+use App\Models\Customer;  
 
 class CustomerController extends Controller
 {
@@ -13,7 +13,16 @@ class CustomerController extends Controller
 
     public function create(Request $request)
     {
-        echo "Firstname = " . $request->firstname;
-        echo "<br>Surname = " . $request->surname;
+        
+        $customer = new Customer();
+
+        
+        $customer->setFirstname($request->firstname);
+        $customer->setSurname($request->surname);
+
+        
+        $customer->save();
+
+        return "Customer saved! Firstname: " . $request->firstname . ", Surname: " . $request->surname;
     }
 }
