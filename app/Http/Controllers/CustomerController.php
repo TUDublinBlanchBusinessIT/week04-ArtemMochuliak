@@ -25,4 +25,19 @@ class CustomerController extends Controller
 
         return "Customer saved! Firstname: " . $request->firstname . ", Surname: " . $request->surname;
     }
+
+    public function edit($id)
+    {
+        $customer = Customer::find($id);           
+        return view('customers.edit')->with('customer', $customer); 
+    }
+
+    public function update(Request $request)
+    {
+        $customer = Customer::find($request->id);  
+        $customer->setFirstname($request->firstname);
+        $customer->setSurname($request->surname);
+        $customer->save();                         
+        return "Customer updated! Firstname: " . $customer->firstname . ", Surname: " . $customer->surname;
+    }
 }
